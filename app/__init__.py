@@ -35,9 +35,26 @@ def upload(filename):
     result, msg = upload_file(str(uid + '_' + filename))
     os.remove(f'tmp/{uid}_{filename}')
     if result:
-        return f'{base_url}/{uid}/{filename}'
+        return f'''
+   ▄▄▄▄▄   ▄   ▄█▄    ▄█▄    ▄███▄     ▄▄▄▄▄    ▄▄▄▄▄   
+  █     ▀▄  █  █▀ ▀▄  █▀ ▀▄  █▀   ▀   █     ▀▄ █     ▀▄ 
+▄  ▀▀▀▀▄ █   █ █   ▀  █   ▀  ██▄▄   ▄  ▀▀▀▀▄ ▄  ▀▀▀▀▄   
+ ▀▄▄▄▄▀  █   █ █▄  ▄▀ █▄  ▄▀ █▄   ▄▀ ▀▄▄▄▄▀   ▀▄▄▄▄▀    
+         █▄ ▄█ ▀███▀  ▀███▀  ▀███▀                      
+          ▀▀▀                                           
+
+File Available At: {base_url}/{uid}/{filename}'''
     else:
-        return f'Something went wrong when trying to upload your file! Error: {msg}'
+        return f'''
+  ▄    ▄  █ ████▄  ▄  █ 
+   █  █   █ █   █ █   █ 
+█   █ ██▀▀█ █   █ ██▀▀█ 
+█   █ █   █ ▀████ █   █ 
+█▄ ▄█    █           █  
+ ▀▀▀    ▀           ▀   
+
+Something went wrong when trying to upload your file!
+Error: {msg}'''
     
 @app.route('/<uid>/<filename>', methods=['GET'])
 def send(uid, filename):
