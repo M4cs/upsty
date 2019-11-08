@@ -1,11 +1,13 @@
 from flask import Flask, request, redirect
 from uuid import uuid4
-import boto3, os
+import boto3, os, json
 
 
 app = Flask(__name__)
-app.config['AWS_ACCESS'] = os.environ.get('AWS_ACCESS_KEY')
-app.config['AWS_SECRET_KEY'] = os.environ.get('AWS_SECRET_KEY')
+with open('.config.json', 'r+') as jsonf:
+    conf = json.load(jsonf)
+    app.config['AWS_ACCESS'] = conf['AWS_ACCESS_KEY']
+    app.config['AWS_SECRET_KEY'] = conf['AWS_SECRET_KEY']
 app.config['S3_UPLOAD_DIR'] = 'psty'
 app.config['S3_BUCKET_NAME'] = 'mbcdn'
 app.config['BASE_URL'] = 'https://up.psty.io'
