@@ -39,8 +39,23 @@ def gen_uid():
 
 @app.route('/')
 def redir():
-    return redirect('https://psty.io', 302)
-    
+    return '''
+upsty - A psty.io Service For Uploading Files
+
+Usage:
+============================================================
+
+curl --upload-file <filepath> https://up.psty.io/<filename>
+
+============================================================
+
+filepath = Path to file. ex: ./script.sh
+
+filename = Name to download as. ex: ./test.sh
+
+============================================================
+'''
+
 @app.route('/<filename>', methods=['PUT'])
 def upload(filename):
     file = request.data
