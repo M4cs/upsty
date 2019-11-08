@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, make_response
 from uuid import uuid4
 import boto3, os, json
 
@@ -39,7 +39,9 @@ def gen_uid():
 
 @app.route('/')
 def redir():
-    return '''
+    headers = {'content-type': 'text'}
+    resp = make_response()
+    return """
 upsty - A psty.io Service For Uploading Files
 
 Usage:
@@ -54,7 +56,7 @@ filepath = Path to file. ex: ./script.sh
 filename = Name to download as. ex: ./test.sh
 
 ============================================================
-'''
+"""
 
 @app.route('/<filename>', methods=['PUT'])
 def upload(filename):
