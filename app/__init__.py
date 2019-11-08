@@ -28,7 +28,7 @@ Something went wrong!'''
 
 def upload_file(filename):
     try:
-        client.upload_file('tmp/{filename}'.format(filename=filename), app.config['S3_BUCKET_NAME'], '{}/{}'.format(app.config['S3_UPLOAD_DIR'], filename))
+        client.upload_file('tmp/{filename}'.format(filename=filename), app.config['S3_BUCKET_NAME'], '{}/{}'.format(app.config['S3_UPLOAD_DIR'], filename), ExtraArgs={'ACL':'public-read'})
         return True, 'Success'
     except Exception as e:
         return False, e
