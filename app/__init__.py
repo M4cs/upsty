@@ -72,5 +72,5 @@ def send(uid, filename):
     url = client.generate_presigned_url(ClientMethod="get_object",
                                         Params={'Bucket': 'mbcdn',
                                                 'Key': 'psty/{uid}_{filename}'.format(uid=uid, filename=filename),
-                                                'ResponseContentDisposition': 'attachment; filename = {filename}'.format(filename=filename)}, ExpiresIn=1)
+                                                'ResponseContentDisposition': 'attachment; filename = {filename}'.format(filename=filename)}, ExpiresIn=30)
     return redirect(url, 302)
