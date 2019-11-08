@@ -28,7 +28,7 @@ Something went wrong!'''
 
 def upload_file(filename):
     try:
-        client.upload_file('tmp/{filename}'.format(filename=filename), app.config['S3_BUCKET_NAME'], '{}/{}'.format(app.config['S3_UPLOAD_DIR'], filename), ExtraArgs={'ACL':'public-read'})
+        client.upload_file('tmp/{filename}'.format(filename=filename), app.config['S3_BUCKET_NAME'], '{}/{}'.format(app.config['S3_UPLOAD_DIR'], filename))
         return True, 'Success'
     except Exception as e:
         return False, e
@@ -69,5 +69,8 @@ Error: {msg}'''.format(msg=msg)
     
 @app.route('/<uid>/<filename>', methods=['GET'])
 def send(uid, filename):
-    url = 'https://mbcdn.sfo2.digitaloceanspaces.com/psty/{}_{}'.format(uid, filename)
+    url = client.generate_presigned_url(ClientMethod="get_object",
+                                        Params={'Bucket': 'mbcdn',
+                                                'Key': '{upload_dir}/{uid}_{filename}'.format(upload_dir=app.config['BASE_URL'], uid=uid, filename=filename),
+                                                'ResponseContentDisposition': 'attachment; filename = {filename}'.format(filename=filename)})
     return redirect(url, 302)
