@@ -40,8 +40,7 @@ def gen_uid():
 @app.route('/')
 def redir():
     headers = {'content-type': 'text'}
-    resp = make_response()
-    return """
+    text = """
 upsty - A psty.io Service For Uploading Files
 
 Usage:
@@ -57,6 +56,8 @@ filename = Name to download as. ex: ./test.sh
 
 ============================================================
 """
+    resp = make_response(text, 200, headers)
+    return resp
 
 @app.route('/<filename>', methods=['PUT'])
 def upload(filename):
