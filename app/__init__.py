@@ -17,13 +17,11 @@ client = boto3s.client('s3', region_name='sfo2', endpoint_url='https://sfo2.digi
 @app.errorhandler(500)
 def error(e):
     return '''
-  ▄    ▄  █ ████▄  ▄  █ 
-   █  █   █ █   █ █   █ 
-█   █ ██▀▀█ █   █ ██▀▀█ 
-█   █ █   █ ▀████ █   █ 
-█▄ ▄█    █           █  
- ▀▀▀    ▀           ▀   
-
+  __  ____       ____  __ 
+ / / / / /  ____/ __ \\/ / 
+/ /_/ / _ \\/___/ /_/ / _ \\
+\\____/_//_/    \\____/_//_/
+                          
 Something went wrong!'''
 
 def upload_file(filename):
@@ -51,23 +49,19 @@ def upload(filename):
     os.remove('tmp/{uid}_{filename}'.format(uid=uid, filename=filename))
     if result:
         return '''
-   ▄▄▄▄▄   ▄   ▄█▄    ▄█▄    ▄███▄     ▄▄▄▄▄    ▄▄▄▄▄   
-  █     ▀▄  █  █▀ ▀▄  █▀ ▀▄  █▀   ▀   █     ▀▄ █     ▀▄ 
-▄  ▀▀▀▀▄ █   █ █   ▀  █   ▀  ██▄▄   ▄  ▀▀▀▀▄ ▄  ▀▀▀▀▄   
- ▀▄▄▄▄▀  █   █ █▄  ▄▀ █▄  ▄▀ █▄   ▄▀ ▀▄▄▄▄▀   ▀▄▄▄▄▀    
-         █▄ ▄█ ▀███▀  ▀███▀  ▀███▀                      
-          ▀▀▀                                           
-
+   ____                       
+  / __/_ _____________ ___ ___
+ _\\ \\/ // / __/ __/ -_|_-<(_-<
+/___/\\_,_/\\__/\\__/\\__/___/___/
+                              
 File Available At: {base_url}/{uid}/{filename}'''.format(base_url=app.config['BASE_URL'], uid=uid, filename=filename)
     else:
         return '''
-  ▄    ▄  █ ████▄  ▄  █ 
-   █  █   █ █   █ █   █ 
-█   █ ██▀▀█ █   █ ██▀▀█ 
-█   █ █   █ ▀████ █   █ 
-█▄ ▄█    █           █  
- ▀▀▀    ▀           ▀   
-
+  __  ____       ____  __ 
+ / / / / /  ____/ __ \\/ / 
+/ /_/ / _ \\/___/ /_/ / _ \\
+\\____/_//_/    \\____/_//_/
+                          
 Something went wrong when trying to upload your file!
 Error: {msg}'''.format(msg=msg)
     
